@@ -1,5 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <!-- Default screen margins, per the Android Design guidelines. -->
-
+    <dimen name="generic_card_padding">40.0px</dimen>
+    <dimen name="artist_width">400.0px</dimen>
+    <dimen name="duration_padding">5.0px</dimen>
+    <dimen name="music_large_text_size">50.0px</dimen>
+    <dimen name="card_cover_art_width">280.0px</dimen>
+    <dimen name="card_cover_art_height">280.0px</dimen>
+    <dimen name="large_text_size">70.0px</dimen>
+    <dimen name="medium_text_size">40.0px</dimen>
+    <dimen name="small_text_size">26.0px</dimen>
+    <dimen name="slider_bar_height">8.0px</dimen>
+    <dimen name="rhs_left_padding">30.0px</dimen>
+    <dimen name="rhs_right_padding">40.0px</dimen>
+    <dimen name="half_width">280.0px</dimen>
 </resources>
