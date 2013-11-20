@@ -1,4 +1,4 @@
-package com.winkmeat.glass.util;
+package com.winkmeat.glass;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,7 +16,6 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.winkmeat.glass.LiveCardService;
 import com.winkmeat.glass.data.PollingResult;
 
 public class StartupService extends IntentService {

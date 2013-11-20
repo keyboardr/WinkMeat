@@ -13,7 +13,6 @@ import android.widget.RemoteViews;
 import com.google.android.glass.timeline.LiveCard;
 import com.google.android.glass.timeline.TimelineManager;
 import com.winkmeat.glass.data.PollingResult;
-import com.winkmeat.glass.util.StartupService;
 
 public class LiveCardService extends Service {
 
