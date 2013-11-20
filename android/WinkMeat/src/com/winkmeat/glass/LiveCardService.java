@@ -91,8 +91,10 @@ public class LiveCardService extends Service {
 	}
 
 	private void removeCard() {
-		mLiveCard.unpublish();
-		mLiveCard = null;
+		if (mLiveCard != null) {
+			mLiveCard.unpublish();
+			mLiveCard = null;
+		}
 	}
 
 	private class PollingThread extends Thread {
