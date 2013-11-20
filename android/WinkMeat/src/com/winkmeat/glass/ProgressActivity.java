@@ -32,7 +32,6 @@ public class ProgressActivity extends Activity {
 		Card card = new Card(this);
 
 		card.setText("Gathering info...");
-		//card.addImage(R.drawable.ic_launcher);
 		card.setTimestamp("Now");
 		View view = card.toView();
 		view.setKeepScreenOn(true);
