@@ -26,5 +26,6 @@
                 android:name="com.google.android.glass.VoiceTrigger"
                 android:resource="@xml/cook_meat" />
         </service>
+        <activity android:name="AlarmListActivity"></activity>
     </application>
 </manifest>
