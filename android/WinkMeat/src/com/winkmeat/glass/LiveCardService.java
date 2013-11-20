@@ -93,13 +93,18 @@ public class LiveCardService extends Service implements OnTripListener,
 		if (BuildConfig.DEBUG) {
 			Log.v(getClass().getSimpleName(), "refreshing alarms");
 		}
-		int alarm1progress = (int) SetAlarmActivity.getProgress(this,
-				R.id.alarm1);
-		if (alarm1progress == 0 && alarm1 != null) {
-			alarm1.reset();
+		int alarm1progress = SetAlarmActivity.getProgress(this, R.id.alarm1);
+		Log.v(getClass().getSimpleName(), "alarm progress: " + alarm1progress);
+		if (alarm1progress == 0) {
+			if (alarm1 != null) {
+				alarm1.reset();
+			}
 			alarm1 = null;
 		} else {
 			int alarm1Value = SetAlarmActivity.getValue(alarm1progress);
+			if (BuildConfig.DEBUG) {
+				Log.v(getClass().getSimpleName(), "alarm value: " + alarm1Value);
+			}
 			if (alarm1 == null) {
 				alarm1 = new Alarm(alarm1Value, alarm1Value - RESET_POINT_DIFF);
 				alarm1.setOnTripListener(this);
@@ -109,13 +114,17 @@ public class LiveCardService extends Service implements OnTripListener,
 			}
 		}
 
-		int alarm2progress = (int) SetAlarmActivity.getProgress(this,
-				R.id.alarm2);
-		if (alarm2progress == 0 && alarm2 != null) {
-			alarm2.reset();
+		int alarm2progress = SetAlarmActivity.getProgress(this, R.id.alarm2);
+		if (alarm2progress == 0) {
+			if (alarm2 != null) {
+				alarm2.reset();
+			}
 			alarm2 = null;
 		} else {
 			int alarm2Value = SetAlarmActivity.getValue(alarm2progress);
+			if (BuildConfig.DEBUG) {
+				Log.v(getClass().getSimpleName(), "alarm value: " + alarm2Value);
+			}
 			if (alarm2 == null) {
 				alarm2 = new Alarm(alarm2Value, alarm2Value - RESET_POINT_DIFF);
 				alarm2.setOnTripListener(this);
@@ -125,13 +134,17 @@ public class LiveCardService extends Service implements OnTripListener,
 			}
 		}
 
-		int alarm3progress = (int) SetAlarmActivity.getProgress(this,
-				R.id.alarm3);
-		if (alarm3progress == 0 && alarm3 != null) {
-			alarm3.reset();
+		int alarm3progress = SetAlarmActivity.getProgress(this, R.id.alarm3);
+		if (alarm3progress == 0) {
+			if (alarm3 != null) {
+				alarm3.reset();
+			}
 			alarm3 = null;
 		} else {
 			int alarm3Value = SetAlarmActivity.getValue(alarm3progress);
+			if (BuildConfig.DEBUG) {
+				Log.v(getClass().getSimpleName(), "alarm value: " + alarm3Value);
+			}
 			if (alarm3 == null) {
 				alarm3 = new Alarm(alarm3Value, alarm3Value - RESET_POINT_DIFF);
 				alarm3.setOnTripListener(this);
