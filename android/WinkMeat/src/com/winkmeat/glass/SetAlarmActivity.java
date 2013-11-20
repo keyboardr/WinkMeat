@@ -1,9 +1,13 @@
 package com.winkmeat.glass;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -33,6 +37,17 @@ public class SetAlarmActivity extends Activity {
 	private boolean tipHidden;
 
 	private String alarmKey;
+
+	private final ServiceConnection mServiceConnection = new ServiceConnection() {
+
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+		}
+
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +84,9 @@ public class SetAlarmActivity extends Activity {
 
 		mGestureDetector = createGestureDetector();
 		updateProgress();
+
+		Intent serviceBinder = new Intent(this, LiveCardService.class);
+		bindService(serviceBinder, mServiceConnection, 0);
 	}
 
 	@Override
@@ -112,15 +130,11 @@ public class SetAlarmActivity extends Activity {
 	}
 
 	@Override
-	protected void onPause() {
-		super.onPause();
-		PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-				.edit().putFloat(alarmKey, position).apply();
-	}
-
-	@Override
 	protected void onStop() {
 		super.onStop();
+		PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+				.edit().putFloat(alarmKey, position).apply();
+		unbindService(mServiceConnection);
 		finish();
 	}
 

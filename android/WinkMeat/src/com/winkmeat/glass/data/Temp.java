@@ -21,7 +21,7 @@ public class Temp implements Parcelable {
 		dest.writeString(n);
 		dest.writeDouble(c);
 	}
-	
+
 	public static final Parcelable.Creator<Temp> CREATOR = new Parcelable.Creator<Temp>() {
 
 		@Override
@@ -52,6 +52,10 @@ public class Temp implements Parcelable {
 	@Override
 	public int describeContents() {
 		return 0;
+	}
+
+	public void setTemperature(double c) {
+		this.c = c;
 	}
 
 }
