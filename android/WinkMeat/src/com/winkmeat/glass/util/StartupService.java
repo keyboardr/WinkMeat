@@ -24,8 +24,8 @@ public class StartupService extends IntentService {
 	private static final Uri LOCAL_URI = Uri
 			.parse("http://192.168.1.3/luci/lm/hmstatus");
 
-	public StartupService(String name) {
-		super(name);
+	public StartupService() {
+		super("StartupService");
 		// TODO Auto-generated constructor stub
 	}
 
