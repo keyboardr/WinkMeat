@@ -16,6 +16,13 @@
         android:label="@string/app_name"
         android:theme="@style/GlassTheme" >
         <service android:name="LiveCardService" >
+            <intent-filter>
+                <action android:name="com.google.android.glass.action.VOICE_TRIGGER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.google.android.glass.VoiceTrigger"
+                android:resource="@xml/cook_meat" />
         </service>
     </application>
 
