@@ -2,5 +2,7 @@
 <resources>
 
     <string name="app_name">WinkMeat</string>
+    <string name="glass_voice_trigger">cook meat</string>
+    <string name="glass_voice_prompt">starting wink meat</string>
 
 </resources>

@@ -1,11 +1,132 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:divider="@android:drawable/divider_horizontal_dark"
+    android:dividerPadding="10px"
+    android:orientation="horizontal"
+    android:showDividers="middle"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
 
-</RelativeLayout>
+        <com.winkmeat.glass.view.TypophileTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Probe 1"
+            android:paddingTop="30px"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <com.winkmeat.glass.view.TypophileTextView
+            android:id="@+id/probe1temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16sp"
+            android:text="96°"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ImageView
+            android:id="@+id/probe1graph"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/probe1alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30px"
+            android:drawableLeft="@drawable/ic_alarm"
+            android:drawablePadding="4dp"
+            android:text="103"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#666" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <com.winkmeat.glass.view.TypophileTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="30px"
+            android:text="Probe 2"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <com.winkmeat.glass.view.TypophileTextView
+            android:id="@+id/probe2temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16sp"
+            android:text="96°"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ImageView
+            android:id="@+id/probe2graph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/probe2alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30px"
+            android:drawableLeft="@drawable/ic_alarm"
+            android:drawablePadding="4dp"
+            android:text="103"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#666" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <com.winkmeat.glass.view.TypophileTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="30px"
+            android:text="Probe 3"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <com.winkmeat.glass.view.TypophileTextView
+            android:id="@+id/probe3temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16sp"
+            android:text="96°"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ImageView
+            android:id="@+id/probe3graph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/probe3alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30px"
+            android:drawableLeft="@drawable/ic_alarm"
+            android:drawablePadding="4dp"
+            android:text="103"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#666" />
+    </LinearLayout>
+
+</LinearLayout>
