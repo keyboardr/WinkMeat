@@ -1,13 +1,10 @@
 package com.winkmeat.glass;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -23,6 +20,8 @@ public class SetAlarmActivity extends Activity {
 
 	public static final String EXTRA_ALARM = "EXTRA_ALARM";
 
+	public static final String ACTION_BROADCAST_ALARM_CHANGED = "ACTION_BROADCAST_ALARM_CHANGED";
+
 	private static final int MIN_VALUE = 100;
 	private static final int MAX_VALUE = 300;
 	private static final float MAX_PROGRESS = 1000f;
@@ -37,17 +36,6 @@ public class SetAlarmActivity extends Activity {
 	private boolean tipHidden;
 
 	private String alarmKey;
-
-	private final ServiceConnection mServiceConnection = new ServiceConnection() {
-
-		@Override
-		public void onServiceDisconnected(ComponentName name) {
-		}
-
-		@Override
-		public void onServiceConnected(ComponentName name, IBinder service) {
-		}
-	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +72,6 @@ public class SetAlarmActivity extends Activity {
 
 		mGestureDetector = createGestureDetector();
 		updateProgress();
-
-		Intent serviceBinder = new Intent(this, LiveCardService.class);
-		bindService(serviceBinder, mServiceConnection, 0);
 	}
 
 	@Override
@@ -134,7 +119,8 @@ public class SetAlarmActivity extends Activity {
 		super.onStop();
 		PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
 				.edit().putFloat(alarmKey, position).apply();
-		unbindService(mServiceConnection);
+		Intent broadcast = new Intent(ACTION_BROADCAST_ALARM_CHANGED);
+		sendBroadcast(broadcast);
 		finish();
 	}
 

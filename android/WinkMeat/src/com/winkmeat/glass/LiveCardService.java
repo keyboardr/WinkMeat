@@ -2,8 +2,10 @@ package com.winkmeat.glass;
 
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.IBinder;
 import android.os.SystemClock;
@@ -17,6 +19,8 @@ import com.winkmeat.glass.data.PollingResult;
 import com.winkmeat.glass.util.Alarm;
 import com.winkmeat.glass.util.Alarm.OnResetListener;
 import com.winkmeat.glass.util.Alarm.OnTripListener;
+import com.winkmeat.glass.util.HistoryImageGenerator;
+import com.winkmeat.glass.util.HistoryProvider;
 import com.winkmeat.glass.util.SmokerTalker;
 
 public class LiveCardService extends Service implements OnTripListener,
@@ -45,6 +49,10 @@ public class LiveCardService extends Service implements OnTripListener,
 	private Alarm alarm2;
 	private Alarm alarm3;
 
+	private HistoryProvider history1 = new HistoryProvider();
+	private HistoryProvider history2 = new HistoryProvider();
+	private HistoryProvider history3 = new HistoryProvider();
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -56,11 +64,13 @@ public class LiveCardService extends Service implements OnTripListener,
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		mProbeUri = intent.getData();
 		refreshAlarms();
+		registerReceiver(alarmChangedReceiver, alarmChangedFilter);
 		return super.onStartCommand(intent, flags, startId);
 	}
 
 	@Override
 	public void onDestroy() {
+		unregisterReceiver(alarmChangedReceiver);
 		mPollingThread.quit();
 		removeCard();
 		super.onDestroy();
@@ -71,14 +81,22 @@ public class LiveCardService extends Service implements OnTripListener,
 		return null;
 	}
 
-	@Override
-	public boolean onUnbind(Intent intent) {
-		refreshAlarms();
-		return false;
-	}
+	private static final IntentFilter alarmChangedFilter = new IntentFilter(
+			SetAlarmActivity.ACTION_BROADCAST_ALARM_CHANGED);
+	private BroadcastReceiver alarmChangedReceiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			refreshAlarms();
+		}
+	};
 
 	private void refreshAlarms() {
-		float alarm1progress = SetAlarmActivity.getProgress(this, R.id.alarm1);
+		if (BuildConfig.DEBUG) {
+			Log.v(getClass().getSimpleName(), "refreshing alarms");
+		}
+		int alarm1progress = (int) SetAlarmActivity.getProgress(this,
+				R.id.alarm1);
 		if (alarm1progress == 0 && alarm1 != null) {
 			alarm1.reset();
 			alarm1 = null;
@@ -93,7 +111,8 @@ public class LiveCardService extends Service implements OnTripListener,
 			}
 		}
 
-		float alarm2progress = SetAlarmActivity.getProgress(this, R.id.alarm2);
+		int alarm2progress = (int) SetAlarmActivity.getProgress(this,
+				R.id.alarm2);
 		if (alarm2progress == 0 && alarm2 != null) {
 			alarm2.reset();
 			alarm2 = null;
@@ -108,7 +127,8 @@ public class LiveCardService extends Service implements OnTripListener,
 			}
 		}
 
-		float alarm3progress = SetAlarmActivity.getProgress(this, R.id.alarm3);
+		int alarm3progress = (int) SetAlarmActivity.getProgress(this,
+				R.id.alarm3);
 		if (alarm3progress == 0 && alarm3 != null) {
 			alarm3.reset();
 			alarm3 = null;
@@ -170,6 +190,10 @@ public class LiveCardService extends Service implements OnTripListener,
 				probe1alarm == 0 ? View.INVISIBLE : View.VISIBLE);
 		view.setTextViewText(R.id.probe1alarm,
 				SetAlarmActivity.getReadableValue(probe1alarm));
+		history1.putTemp(data.getTemps().get(0).getTemperature());
+		view.setImageViewBitmap(R.id.probe1graph, HistoryImageGenerator
+				.drawHistory(history1.getTemps(), probe1alarm == 0 ? null
+						: (double) SetAlarmActivity.getValue(probe1alarm)));
 
 		view.setTextViewText(R.id.probe2temp,
 				String.format("%.1f°", data.getTemps().get(1).getTemperature()));
@@ -181,6 +205,10 @@ public class LiveCardService extends Service implements OnTripListener,
 				probe2alarm == 0 ? View.INVISIBLE : View.VISIBLE);
 		view.setTextViewText(R.id.probe2alarm,
 				SetAlarmActivity.getReadableValue(probe2alarm));
+		history2.putTemp(data.getTemps().get(1).getTemperature());
+		view.setImageViewBitmap(R.id.probe2graph, HistoryImageGenerator
+				.drawHistory(history2.getTemps(), probe2alarm == 0 ? null
+						: (double) SetAlarmActivity.getValue(probe2alarm)));
 
 		view.setTextViewText(R.id.probe3temp,
 				String.format("%.1f°", data.getTemps().get(2).getTemperature()));
@@ -192,6 +220,10 @@ public class LiveCardService extends Service implements OnTripListener,
 				probe3alarm == 0 ? View.INVISIBLE : View.VISIBLE);
 		view.setTextViewText(R.id.probe3alarm,
 				SetAlarmActivity.getReadableValue(probe3alarm));
+		history3.putTemp(data.getTemps().get(2).getTemperature());
+		view.setImageViewBitmap(R.id.probe3graph, HistoryImageGenerator
+				.drawHistory(history3.getTemps(), probe3alarm == 0 ? null
+						: (double) SetAlarmActivity.getValue(probe3alarm)));
 
 		card.setViews(view);
 	}
@@ -234,10 +266,6 @@ public class LiveCardService extends Service implements OnTripListener,
 				result.getTemps().get(0).setTemperature(TEST_TEMP.getNext());
 			}
 			publishCard(LiveCardService.this, result);
-			if (BuildConfig.DEBUG) {
-				Log.v(getClass().getCanonicalName(), result.getTemps()
-						.toString());
-			}
 		}
 
 	}
