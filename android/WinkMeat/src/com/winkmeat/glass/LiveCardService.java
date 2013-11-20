@@ -27,7 +27,7 @@ public class LiveCardService extends Service implements OnTripListener,
 	private static final int RESET_POINT_DIFF = 5;
 	private static boolean DEBUG_ALARM = true;
 	public static final String INTERSTITIAL_CARD_ID = "interstitialCard";
-	
+
 	public static LiveCard interstitialLiveCard;
 
 	public static void startService(Context context, Uri probeUri) {
@@ -79,7 +79,8 @@ public class LiveCardService extends Service implements OnTripListener,
 
 	private void refreshAlarms() {
 		float alarm1progress = SetAlarmActivity.getProgress(this, R.id.alarm1);
-		if (alarm1progress == 0) {
+		if (alarm1progress == 0 && alarm1 != null) {
+			alarm1.reset();
 			alarm1 = null;
 		} else {
 			int alarm1Value = SetAlarmActivity.getValue(alarm1progress);
@@ -93,7 +94,8 @@ public class LiveCardService extends Service implements OnTripListener,
 		}
 
 		float alarm2progress = SetAlarmActivity.getProgress(this, R.id.alarm2);
-		if (alarm2progress == 0) {
+		if (alarm2progress == 0 && alarm2 != null) {
+			alarm2.reset();
 			alarm2 = null;
 		} else {
 			int alarm2Value = SetAlarmActivity.getValue(alarm2progress);
@@ -107,7 +109,8 @@ public class LiveCardService extends Service implements OnTripListener,
 		}
 
 		float alarm3progress = SetAlarmActivity.getProgress(this, R.id.alarm3);
-		if (alarm3progress == 0) {
+		if (alarm3progress == 0 && alarm3 != null) {
+			alarm3.reset();
 			alarm3 = null;
 		} else {
 			int alarm3Value = SetAlarmActivity.getValue(alarm3progress);
@@ -256,14 +259,36 @@ public class LiveCardService extends Service implements OnTripListener,
 
 	@Override
 	public void onTrip(Alarm alarm) {
-		// TODO Auto-generated method stub
+		Intent intent = new Intent(this, AlarmActivity.class);
+		if (alarm == alarm1) {
+			intent.putExtra(AlarmActivity.EXTRA_ALARM_ID, R.id.alarm1);
+		}
+		if (alarm == alarm2) {
+			intent.putExtra(AlarmActivity.EXTRA_ALARM_ID, R.id.alarm2);
+		}
+		if (alarm == alarm3) {
+			intent.putExtra(AlarmActivity.EXTRA_ALARM_ID, R.id.alarm3);
+		}
+		intent.putExtra(AlarmActivity.EXTRA_ALARM_TEMP, alarm.getSetPoint());
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
+		startActivity(intent);
 	}
 
 	@Override
 	public void onReset(Alarm alarm) {
-		// TODO Auto-generated method stub
 
+		Intent intent = new Intent(AlarmActivity.ACTION_ALARM_RESET);
+		if (alarm == alarm1) {
+			intent.putExtra(AlarmActivity.EXTRA_ALARM_ID, R.id.alarm1);
+		}
+		if (alarm == alarm2) {
+			intent.putExtra(AlarmActivity.EXTRA_ALARM_ID, R.id.alarm2);
+		}
+		if (alarm == alarm3) {
+			intent.putExtra(AlarmActivity.EXTRA_ALARM_ID, R.id.alarm3);
+		}
+		sendBroadcast(intent);
 	}
 
 }

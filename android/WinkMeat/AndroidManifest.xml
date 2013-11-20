@@ -9,6 +9,7 @@
         android:targetSdkVersion="15" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -26,7 +27,18 @@
                 android:name="com.google.android.glass.VoiceTrigger"
                 android:resource="@xml/cook_meat" />
         </service>
-        <activity android:name="AlarmListActivity" android:theme="@style/GlassTheme.SemiTransparent"></activity>
-        <activity android:name="SetAlarmActivity"></activity>
+
+        <activity
+            android:name="AlarmListActivity"
+            android:theme="@style/GlassTheme.SemiTransparent" >
+        </activity>
+        <activity android:name="SetAlarmActivity" >
+        </activity>
+        <activity android:name="AlarmActivity" >
+        </activity>
+
+        <service android:name="AlarmNoiseService" >
+        </service>
     </application>
+
 </manifest>
