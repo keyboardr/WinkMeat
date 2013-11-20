@@ -12,6 +12,7 @@
     <ImageView
         android:id="@+id/indeterminate_slider"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/slider_bar_height"/>
+        android:layout_height="@dimen/slider_bar_height"
+        android:background="@drawable/slider_indeterminate" />
 
 </FrameLayout>
