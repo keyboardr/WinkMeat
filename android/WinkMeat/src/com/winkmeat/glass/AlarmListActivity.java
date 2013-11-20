@@ -6,6 +6,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.android.glass.view.MenuUtils;
+
 public class AlarmListActivity extends Activity {
 	@Override
 	protected void onResume() {
@@ -17,6 +19,12 @@ public class AlarmListActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
+		MenuUtils.setDescription(menu.findItem(R.id.alarm1), "Probe 1: "
+				+ "Alarm Off");
+		MenuUtils.setDescription(menu.findItem(R.id.alarm2), "Probe 2: "
+				+ "Alarm Off");
+		MenuUtils.setDescription(menu.findItem(R.id.alarm3), "Probe 3: "
+				+ "Alarm Off");
 		return true;
 	}
 

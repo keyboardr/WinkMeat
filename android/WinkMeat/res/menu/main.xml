@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/stop" android:title="Stop"></item>
-    
+
+    <item
+        android:id="@+id/alarm1"
+        android:icon="@drawable/ic_action_alerts_and_states_add_alarm"
+        android:title="Set Alarm 1">
+    </item>
+    <item
+        android:id="@+id/alarm2"
+        android:icon="@drawable/ic_action_alerts_and_states_add_alarm"
+        android:title="Set Alarm 2">
+    </item>
+    <item
+        android:id="@+id/alarm3"
+        android:icon="@drawable/ic_action_alerts_and_states_add_alarm"
+        android:title="Set Alarm 3">
+    </item>
+    <item
+        android:id="@+id/stop"
+        android:icon="@drawable/ic_action_stop"
+        android:title="Stop">
+    </item>
 
 </menu>
