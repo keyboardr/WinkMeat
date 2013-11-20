@@ -14,6 +14,7 @@ import android.widget.RemoteViews;
 import com.google.android.glass.timeline.LiveCard;
 import com.google.android.glass.timeline.TimelineManager;
 import com.winkmeat.glass.data.PollingResult;
+import com.winkmeat.glass.util.SmokerTalker;
 
 public class LiveCardService extends Service {
 
@@ -123,7 +124,7 @@ public class LiveCardService extends Service {
 		}
 
 		protected void poll() {
-			PollingResult result = StartupService.getSmokerStatus(mProbeUri);
+			PollingResult result = SmokerTalker.getSmokerStatus(mProbeUri);
 			publishCard(LiveCardService.this, result);
 			if (BuildConfig.DEBUG) {
 				Log.v(getClass().getCanonicalName(), result.getTemps()
