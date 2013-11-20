@@ -20,6 +20,9 @@ public class LiveCardService extends Service {
 
 	private static final String CARD_ID = "winkmeat_card";
 	public static final long POLLING_PERIOD = 2000;
+	public static final String INTERSTITIAL_CARD_ID = "interstitialCard";
+	
+	public static LiveCard interstitialLiveCard;
 
 	public static void startService(Context context, Uri probeUri) {
 		Intent intent = new Intent(context, LiveCardService.class);
