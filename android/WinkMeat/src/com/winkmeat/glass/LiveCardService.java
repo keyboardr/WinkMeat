@@ -62,7 +62,8 @@ public class LiveCardService extends Service implements OnTripListener,
 		mProbeUri = intent.getData();
 		refreshAlarms();
 		registerReceiver(alarmChangedReceiver, alarmChangedFilter);
-		return super.onStartCommand(intent, flags, startId);
+		super.onStartCommand(intent, flags, startId);
+		return START_REDELIVER_INTENT;
 	}
 
 	@Override
