@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/FrameLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.winkmeat.glass.view.SliderView
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/slider_bar_height"
+        android:layout_gravity="bottom"
+        android:background="@color/background_dark_gray" >
+    </com.winkmeat.glass.view.SliderView>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Alarm Off"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="40px"
+        android:text="Swipe left or right to adjust alarm setpoint"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40px"
+        android:text="Probe %d Alarm:"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#99cc33" />
+
+</FrameLayout>

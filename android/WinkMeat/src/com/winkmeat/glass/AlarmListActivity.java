@@ -31,6 +31,13 @@ public class AlarmListActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case R.id.alarm1:
+		case R.id.alarm2:
+		case R.id.alarm3:
+			Intent intent = new Intent(this, SetAlarmActivity.class);
+			intent.putExtra(SetAlarmActivity.EXTRA_ALARM, item.getItemId());
+			startActivity(intent);
+			return true;
 		case R.id.stop:
 			stopService(new Intent(this, LiveCardService.class));
 			return true;

@@ -27,5 +27,6 @@
                 android:resource="@xml/cook_meat" />
         </service>
         <activity android:name="AlarmListActivity" android:theme="@style/GlassTheme.SemiTransparent"></activity>
+        <activity android:name="SetAlarmActivity"></activity>
     </application>
 </manifest>
