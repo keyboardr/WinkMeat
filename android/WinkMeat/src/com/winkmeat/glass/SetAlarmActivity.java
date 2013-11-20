@@ -18,11 +18,13 @@ import com.winkmeat.glass.view.SliderView;
 
 public class SetAlarmActivity extends Activity {
 
+	private static final int ALARM_INCREMENT = 5;
+
 	public static final String EXTRA_ALARM = "EXTRA_ALARM";
 
 	public static final String ACTION_BROADCAST_ALARM_CHANGED = "ACTION_BROADCAST_ALARM_CHANGED";
 
-	private static final int MIN_VALUE = 150;
+	private static final int MIN_VALUE = 120;
 	private static final int MAX_VALUE = 350;
 	private static final float MAX_PROGRESS = 1000f;
 
@@ -140,11 +142,12 @@ public class SetAlarmActivity extends Activity {
 	}
 
 	public static final int getValue(float progress) {
-		return (int) (MIN_VALUE + (progress / MAX_PROGRESS)
-				* (MAX_VALUE - MIN_VALUE));
+		return (((int) (MIN_VALUE + (progress / MAX_PROGRESS)
+				* (MAX_VALUE - MIN_VALUE))) / ALARM_INCREMENT)
+				* ALARM_INCREMENT;
 	}
 
-	public static float getProgress(Context context, int alarmId) {
+	public static int getProgress(Context context, int alarmId) {
 		String alarmKey;
 		switch (alarmId) {
 		case R.id.alarm1:
@@ -159,8 +162,8 @@ public class SetAlarmActivity extends Activity {
 		default:
 			throw new IllegalArgumentException("Invalid alarm id:" + alarmId);
 		}
-		return PreferenceManager.getDefaultSharedPreferences(
-				context.getApplicationContext()).getFloat(alarmKey, 0);
+		return (int) PreferenceManager.getDefaultSharedPreferences(
+				context.getApplicationContext()).getFloat(alarmKey, 0f);
 	}
 
 }
