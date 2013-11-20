@@ -4,9 +4,16 @@ public class Temp {
 	public String getProbeName() {
 		return n;
 	}
+
 	public Double getTemperature() {
 		return c;
 	}
+
 	String n;
 	Double c;
+
+	@Override
+	public String toString() {
+		return n + ":" + c;
+	}
 }

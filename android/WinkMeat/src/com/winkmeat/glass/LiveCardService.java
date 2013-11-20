@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -60,6 +61,8 @@ public class LiveCardService extends Service {
 			TimelineManager timeMan = TimelineManager.from(context);
 			mLiveCard = timeMan.getLiveCard(CARD_ID);
 
+			mLiveCard.setNonSilent(true);
+
 			Intent intent = new Intent(context, AlarmListActivity.class);
 			mLiveCard.setAction(PendingIntent
 					.getActivity(context, 0, intent, 0));
@@ -73,15 +76,15 @@ public class LiveCardService extends Service {
 				R.layout.activity_main);
 
 		view.setTextViewText(R.id.probe1temp,
-				String.format("%d°", data.getTemps().get(0).getTemperature()));
+				String.format("%.1f°", data.getTemps().get(0).getTemperature()));
 		view.setViewVisibility(R.id.probe1alarm, View.INVISIBLE);
 
 		view.setTextViewText(R.id.probe2temp,
-				String.format("%d°", data.getTemps().get(1).getTemperature()));
+				String.format("%.1f°", data.getTemps().get(1).getTemperature()));
 		view.setViewVisibility(R.id.probe2alarm, View.INVISIBLE);
 
 		view.setTextViewText(R.id.probe3temp,
-				String.format("%d°", data.getTemps().get(2).getTemperature()));
+				String.format("%.1f°", data.getTemps().get(2).getTemperature()));
 		view.setViewVisibility(R.id.probe3alarm, View.INVISIBLE);
 
 		card.setViews(view);
@@ -120,6 +123,10 @@ public class LiveCardService extends Service {
 		protected void poll() {
 			PollingResult result = StartupService.getSmokerStatus(mProbeUri);
 			publishCard(LiveCardService.this, result);
+			if (BuildConfig.DEBUG) {
+				Log.v(getClass().getCanonicalName(), result.getTemps()
+						.toString());
+			}
 		}
 
 	}
