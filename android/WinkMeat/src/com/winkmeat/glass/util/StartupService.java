@@ -20,8 +20,8 @@ import com.winkmeat.glass.data.PollingResult;
 
 public class StartupService extends IntentService {
 
-	public StartupService(String name) {
-		super(name);
+	public StartupService() {
+		super("StartupService");
 		// TODO Auto-generated constructor stub
 	}
 
