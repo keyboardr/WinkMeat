@@ -12,7 +12,7 @@ public class HistoryImageGenerator {
 
 	public static Bitmap drawHistory(List<Double> history, Double alarm) {
 		int height = 72;
-		int width = 72;
+		int width = 120;
 		Bitmap bitmap = Bitmap.createBitmap(height, width,
 				Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);

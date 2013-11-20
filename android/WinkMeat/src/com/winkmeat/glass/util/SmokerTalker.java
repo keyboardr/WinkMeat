@@ -18,8 +18,8 @@ import com.winkmeat.glass.data.PollingResult;
 public class SmokerTalker {
 
 	public static final Uri LOCAL_URI = Uri
-			.parse("http://192.168.1.2/luci/lm/hmstatus");
-	public static final boolean USE_DEBUG = true;
+			.parse("http://192.168.1.3/luci/lm/hmstatus");
+	public static final boolean USE_DEBUG = false;
 
 	public static PollingResult getSmokerStatus(Uri uri) {
 		if (uri == null) {

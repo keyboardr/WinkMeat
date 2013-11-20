@@ -24,8 +24,8 @@ public class SetAlarmActivity extends Activity {
 
 	public static final String ACTION_BROADCAST_ALARM_CHANGED = "ACTION_BROADCAST_ALARM_CHANGED";
 
-	private static final int MIN_VALUE = 120;
-	private static final int MAX_VALUE = 350;
+	private static final int MIN_VALUE = 100;
+	private static final int MAX_VALUE = 200;
 	private static final float MAX_PROGRESS = 1000f;
 
 	private SliderView mProgress;
