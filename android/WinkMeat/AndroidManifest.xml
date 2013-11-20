@@ -36,6 +36,7 @@
         </activity>
         <activity android:name="AlarmActivity" >
         </activity>
+        <activity android:name="ProgressActivity" />
 
         <service android:name="AlarmNoiseService" >
         </service>

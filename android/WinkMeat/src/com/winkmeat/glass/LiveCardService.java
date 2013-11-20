@@ -26,9 +26,6 @@ public class LiveCardService extends Service implements OnTripListener,
 	private static final long POLLING_PERIOD = 2000;
 	private static final int RESET_POINT_DIFF = 5;
 	private static boolean DEBUG_ALARM = true;
-	public static final String INTERSTITIAL_CARD_ID = "interstitialCard";
-
-	public static LiveCard interstitialLiveCard;
 
 	public static void startService(Context context, Uri probeUri) {
 		Intent intent = new Intent(context, LiveCardService.class);
