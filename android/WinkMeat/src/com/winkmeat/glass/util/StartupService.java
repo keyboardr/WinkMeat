@@ -8,7 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 
-import android.app.Service;
+import android.app.IntentService;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
@@ -18,19 +18,33 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.winkmeat.glass.data.PollingResult;
 
-public class StartupService extends Service {
+public class StartupService extends IntentService {
 
+	public StartupService(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+
+	public static final boolean USE_DEBUG = true;
+	
 	public static PollingResult getSmokerStatus(Uri uri) {
+		if (uri == null)
+			uri = Uri.parse("http://192.168.1.3/luci/lm/hmstatus");
+		
 		Gson gson = new Gson();
 		Type pollingResultType = new TypeToken<PollingResult>(){}.getType();
-		//String pollingResultJson = getUrlResult("http://192.168.1.3/luci/lm/hmstatus");
-		String pollingResultJson = "{\"time\":1384903341,\"set\":225,\"lid\":0,\"fan\":{\"c\":0,\"a\":0},\"temps\":[{\"n\":\"Probe 0\",\"c\":74.3,\"a\":{\"l\":-40,\"h\":-200,\"r\":null}},{\"n\":\"Probe 1\",\"c\":80.3,\"a\":{\"l\":-40,\"h\":-200,\"r\":null}},{\"n\":\"Probe 2\",\"c\":72.2,\"a\":{\"l\":-40,\"h\":-200,\"r\":null}},{\"n\":\"Probe 3\",\"c\":88.9,\"a\":{\"l\":-40,\"h\":-200,\"r\":null}}]}";
+		String pollingResultJson = null;
+		if (USE_DEBUG)
+			pollingResultJson = "{\"time\":1384903341,\"set\":225,\"lid\":0,\"fan\":{\"c\":0,\"a\":0},\"temps\":[{\"n\":\"Probe 0\",\"c\":74.3,\"a\":{\"l\":-40,\"h\":-200,\"r\":null}},{\"n\":\"Probe 1\",\"c\":80.3,\"a\":{\"l\":-40,\"h\":-200,\"r\":null}},{\"n\":\"Probe 2\",\"c\":72.2,\"a\":{\"l\":-40,\"h\":-200,\"r\":null}},{\"n\":\"Probe 3\",\"c\":88.9,\"a\":{\"l\":-40,\"h\":-200,\"r\":null}}]}";
+		else
+			pollingResultJson = getUrlResult(uri);
+		
 		return gson.fromJson(pollingResultJson, pollingResultType);
 	}
 
-	private static String getUrlResult(String urlName) {
+	private static String getUrlResult(Uri uri) {
 		try {
-			URL url = new URL(urlName);
+			URL url = new URL(uri.toString());
 			BufferedReader rd = new BufferedReader(new InputStreamReader(url.openStream()));
 		    String line=null;
 		    String message = new String();
@@ -56,6 +70,12 @@ public class StartupService extends Service {
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	protected void onHandleIntent(Intent intent) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
