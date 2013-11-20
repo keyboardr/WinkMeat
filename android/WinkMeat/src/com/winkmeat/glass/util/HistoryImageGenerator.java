@@ -6,7 +6,6 @@ import java.util.List;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Log;
 
 public class HistoryImageGenerator {
 	private static final float MIN_RANGE = 30f;
@@ -42,8 +41,6 @@ public class HistoryImageGenerator {
 					- ((history.get(i - 1) - minValue) / (maxValue - minValue))
 					* height;
 			double newX = (((float) i - 1) / 15) * width;
-			Log.v("Draw", String.format("x: %f, y: %f, newX: %f, newY: %ff", x,
-					y, newX, newY));
 			canvas.drawLine((float) x, (float) y, (float) newX, (float) newY,
 					historyPaint);
 		}
@@ -54,7 +51,6 @@ public class HistoryImageGenerator {
 			alarmPaint.setStrokeWidth(2f);
 			double y = height - ((alarm - minValue) / (maxValue - minValue))
 					* height;
-			Log.v("Draw", String.format("alarm y: %f", y));
 			canvas.drawLine(0, (float) y, width, (float) y, alarmPaint);
 		}
 		return bitmap;
