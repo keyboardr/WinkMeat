@@ -1,6 +1,7 @@
 package com.winkmeat.glass;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -129,18 +130,37 @@ public class SetAlarmActivity extends Activity {
 	}
 
 	private void updateProgress() {
-		mText.setText(position == 0 ? "Alarm Off" : String.format("%d°",
-				getValue()));
+		mText.setText(getReadableValue(position));
 		mProgress.setManualProgress(position / MAX_PROGRESS);
 	}
 
-	private int getValue() {
-		return getValue(position);
+	public static String getReadableValue(float progress) {
+		return progress == 0 ? "Alarm Off" : String.format("%d°",
+				getValue(progress));
 	}
 
 	public static final int getValue(float progress) {
 		return (int) (MIN_VALUE + (progress / MAX_PROGRESS)
 				* (MAX_VALUE - MIN_VALUE));
+	}
+
+	public static float getProgress(Context context, int alarmId) {
+		String alarmKey;
+		switch (alarmId) {
+		case R.id.alarm1:
+			alarmKey = "alarm1";
+			break;
+		case R.id.alarm2:
+			alarmKey = "alarm2";
+			break;
+		case R.id.alarm3:
+			alarmKey = "alarm3";
+			break;
+		default:
+			throw new IllegalArgumentException("Invalid alarm id:" + alarmId);
+		}
+		return PreferenceManager.getDefaultSharedPreferences(
+				context.getApplicationContext()).getFloat(alarmKey, 0);
 	}
 
 }

@@ -19,12 +19,21 @@ public class AlarmListActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
-		MenuUtils.setDescription(menu.findItem(R.id.alarm1), "Probe 1: "
-				+ "Alarm Off");
-		MenuUtils.setDescription(menu.findItem(R.id.alarm2), "Probe 2: "
-				+ "Alarm Off");
-		MenuUtils.setDescription(menu.findItem(R.id.alarm3), "Probe 3: "
-				+ "Alarm Off");
+		MenuUtils.setDescription(
+				menu.findItem(R.id.alarm1),
+				"Probe 1: "
+						+ SetAlarmActivity.getReadableValue(SetAlarmActivity
+								.getProgress(this, R.id.alarm1)));
+		MenuUtils.setDescription(
+				menu.findItem(R.id.alarm2),
+				"Probe 2: "
+						+ SetAlarmActivity.getReadableValue(SetAlarmActivity
+								.getProgress(this, R.id.alarm2)));
+		MenuUtils.setDescription(
+				menu.findItem(R.id.alarm3),
+				"Probe 3: "
+						+ SetAlarmActivity.getReadableValue(SetAlarmActivity
+								.getProgress(this, R.id.alarm3)));
 		return true;
 	}
 

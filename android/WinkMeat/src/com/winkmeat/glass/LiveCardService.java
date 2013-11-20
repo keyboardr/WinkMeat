@@ -78,15 +78,27 @@ public class LiveCardService extends Service {
 
 		view.setTextViewText(R.id.probe1temp,
 				String.format("%.1f°", data.getTemps().get(0).getTemperature()));
-		view.setViewVisibility(R.id.probe1alarm, View.INVISIBLE);
+		float probe1alarm = SetAlarmActivity.getProgress(this, R.id.alarm1);
+		view.setViewVisibility(R.id.probe1alarm,
+				probe1alarm == 0 ? View.INVISIBLE : View.VISIBLE);
+		view.setTextViewText(R.id.probe1alarm,
+				SetAlarmActivity.getReadableValue(probe1alarm));
 
 		view.setTextViewText(R.id.probe2temp,
 				String.format("%.1f°", data.getTemps().get(1).getTemperature()));
-		view.setViewVisibility(R.id.probe2alarm, View.INVISIBLE);
+		float probe2alarm = SetAlarmActivity.getProgress(this, R.id.alarm2);
+		view.setViewVisibility(R.id.probe2alarm,
+				probe2alarm == 0 ? View.INVISIBLE : View.VISIBLE);
+		view.setTextViewText(R.id.probe2alarm,
+				SetAlarmActivity.getReadableValue(probe2alarm));
 
 		view.setTextViewText(R.id.probe3temp,
 				String.format("%.1f°", data.getTemps().get(2).getTemperature()));
-		view.setViewVisibility(R.id.probe3alarm, View.INVISIBLE);
+		float probe3alarm = SetAlarmActivity.getProgress(this, R.id.alarm3);
+		view.setViewVisibility(R.id.probe3alarm,
+				probe3alarm == 0 ? View.INVISIBLE : View.VISIBLE);
+		view.setTextViewText(R.id.probe3alarm,
+				SetAlarmActivity.getReadableValue(probe3alarm));
 
 		card.setViews(view);
 	}
