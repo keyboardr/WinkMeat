@@ -17,9 +17,10 @@ import com.winkmeat.glass.data.PollingResult;
 
 public class SmokerTalker {
 
-	public static final Uri LOCAL_URI = Uri.parse("http://192.168.1.2/luci/lm/hmstatus");
-	public static final boolean USE_DEBUG = false;
-	
+	public static final Uri LOCAL_URI = Uri
+			.parse("http://192.168.1.2/luci/lm/hmstatus");
+	public static final boolean USE_DEBUG = true;
+
 	public static PollingResult getSmokerStatus(Uri uri) {
 		if (uri == null) {
 			uri = SmokerTalker.LOCAL_URI;
@@ -41,7 +42,8 @@ public class SmokerTalker {
 	public static String getUrlResult(Uri uri) {
 		try {
 			URL url = new URL(uri.toString());
-			BufferedReader rd = new BufferedReader(new InputStreamReader(url.openStream()));
+			BufferedReader rd = new BufferedReader(new InputStreamReader(
+					url.openStream()));
 			String line = null;
 			final StringBuffer buffer = new StringBuffer(2048);
 			while ((line = rd.readLine()) != null) {
