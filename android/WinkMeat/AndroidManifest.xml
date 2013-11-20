@@ -27,5 +27,4 @@
                 android:resource="@xml/cook_meat" />
         </service>
     </application>
-
 </manifest>
