@@ -16,6 +16,8 @@
         android:label="@string/app_name"
         android:theme="@style/GlassTheme" >
         <service android:name="LiveCardService" >
+        </service>
+        <service android:name="StartupService" >
             <intent-filter>
                 <action android:name="com.google.android.glass.action.VOICE_TRIGGER" />
             </intent-filter>
