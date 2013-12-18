@@ -48,8 +48,7 @@ public class AlarmActivity extends Activity {
 		default:
 			throw new IllegalArgumentException("Invalid alarm id:" + alarm);
 		}
-		card.setInfo(String.format("%d°", temp));
-		card.setTimestamp("Now");
+		card.setFootnote(String.format("%d°", temp));
 		View view = card.toView();
 		view.setKeepScreenOn(true);
 		setContentView(view);

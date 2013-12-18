@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import com.google.android.glass.timeline.LiveCard;
+import com.google.android.glass.timeline.LiveCard.PublishMode;
 import com.google.android.glass.timeline.TimelineManager;
 import com.winkmeat.glass.data.PollingResult;
 import com.winkmeat.glass.util.Alarm;
@@ -172,14 +173,12 @@ public class LiveCardService extends Service implements OnTripListener,
 	private void publishCard(Context context, PollingResult data) {
 		if (mLiveCard == null) {
 			TimelineManager timeMan = TimelineManager.from(context);
-			mLiveCard = timeMan.getLiveCard(CARD_ID);
-
-			mLiveCard.setNonSilent(true);
+			mLiveCard = timeMan.createLiveCard(CARD_ID);
 
 			Intent intent = new Intent(context, AlarmListActivity.class);
 			mLiveCard.setAction(PendingIntent
 					.getActivity(context, 0, intent, 0));
-			mLiveCard.publish();
+			mLiveCard.publish(PublishMode.REVEAL);
 		}
 		updateAlarmValues(data.getTemps().get(0).getTemperature(), data
 				.getTemps().get(1).getTemperature(), data.getTemps().get(2)
