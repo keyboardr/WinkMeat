@@ -49,7 +49,7 @@ public class AlarmActivity extends Activity {
 			throw new IllegalArgumentException("Invalid alarm id:" + alarm);
 		}
 		card.setFootnote(String.format("%d°", temp));
-		View view = card.toView();
+		View view = card.getView();
 		view.setKeepScreenOn(true);
 		setContentView(view);
 		registerReceiver(resetReceiver, resetFilter);
